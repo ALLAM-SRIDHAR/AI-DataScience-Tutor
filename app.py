@@ -1,7 +1,13 @@
 import streamlit as st
 import google.generativeai as genai
+import os
+#genai.configure(api_key="AIzaSyBg3WQZ_CB0SwnKhC7xtbljK-E6_ILG1rs")
 
-genai.configure(api_key="AIzaSyBg3WQZ_CB0SwnKhC7xtbljK-E6_ILG1rs")
+api_key = os.getenv("GENAI_API_KEY")
+if api_key is None:
+    st.error("API key is not set. Please configure the GENAI_API_KEY environment variable.")
+else:
+    genai.configure(api_key=api_key)
 
 sys_prompt="""You are a helpful AI Tutor for Data Science.
 Students will ask you doubts related to various topics in data science.
